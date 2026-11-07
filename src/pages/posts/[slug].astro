@@ -1,0 +1,23 @@
+---
+import BlogPostLayout from '../../layouts/BlogPostLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  return posts.filter((p) => !p.data.draft).map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+---
+
+<BlogPostLayout {...post.data} title={post.data.title}>
+  <slot name="head" />
+  {post.data.draft && (
+    <div class="bg-amber-50 border border-amber-200 rounded p-4 mb-6 text-sm text-amber-800">
+      Draft post — visible only in admin preview.
+    </div>
+  )}
+</BlogPostLayout>

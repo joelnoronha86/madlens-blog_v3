@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('posts');
+
+// Collect unique images used across posts for the gallery
+const usedImages = new Set<string>();
+posts.forEach((post) => {
+  if (post.data.coverImage) usedImages.add(post.data.coverImage);
+});
+---
+
+<BaseLayout title="Image Gallery">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="flex flex-col md:flex-row justify-between items-end mb-8 gap-4">
+      <div>
+        <h1 class="text-3xl font-heading font-bold text-text mb-2">Image Gallery</h1>
+        <p class="text-muted font-body">
+          All saved images from natural dyeing processes, plants, and geographies.
+        </p>
+      </div>
+      <a
+        href="/admin"
+        class="inline-flex items-center gap-2 px-4 py-2 bg-text text-surface rounded-lg font-medium hover:bg-accent transition-colors"
+      >
+        <span>Admin Upload</span>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
+      </a>
+    </div>
+
+    {usedImages.size === 0 ? (
+      <div class="text-center py-20">
+        <p class="text-muted">No images in the gallery yet.</p>
+        <p class="text-sm text-muted mt-2">Upload images from the admin area to get started.</p>
+      </div>
+    ) : (
+      <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {[...usedImages].map((src) => (
+          <figure class="group rounded-lg overflow-hidden border border-border bg-surface">
+            <img
+              src={src}
+              alt="Gallery image"
+              class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+              loading="lazy"
+            />
+            <figcaption class="p-3 text-sm text-muted">
+              {src.split('/').pop() ?? 'Image'}
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    )}
+  </div>
+</BaseLayout>

@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap');
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-heading: 'Cormorant Garamond', serif;
+    --font-body: 'Lora', serif;
+    --font-tech: 'Courier Prime', monospace;
+
+    --color-bg: #faf7f2;
+    --color-surface: #ffffff;
+    --color-text: #2d241e;
+    --color-muted: #6e6258;
+    --color-accent: #8b6b4f;
+    --color-accent-hover: #a67c5e;
+    --color-border: #e3d8cc;
+
+    --color-bg-dark: #1a1612;
+    --color-surface-dark: #24201a;
+    --color-text-dark: #f5efe6;
+    --color-muted-dark: #a89c8e;
+    --color-accent-dark: #c9a87e;
+    --color-accent-hover-dark: #d9b98f;
+    --color-border-dark: #3d362e;
+  }
+
+  .dark {
+    --color-bg: var(--color-bg-dark);
+    --color-surface: var(--color-surface-dark);
+    --color-text: var(--color-text-dark);
+    --color-muted: var(--color-muted-dark);
+    --color-accent: var(--color-accent-dark);
+    --color-accent-hover: var(--color-accent-hover-dark);
+    --color-border: var(--color-border-dark);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .font-tech {
+    font-family: var(--font-tech);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer utilities {
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+}

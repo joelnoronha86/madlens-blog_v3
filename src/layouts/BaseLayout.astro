@@ -1,0 +1,38 @@
+---
+import '../styles/global.css';
+import { Navbar } from '../components/Navbar.tsx';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('posts');
+const publishedPosts = posts.filter((p) => !p.data.draft);
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{Astro.props.title ?? 'Geographies of Textiles & Natural Dyes'}</title>
+    <slot name="head" />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <Navbar />
+    <main class="flex-grow">
+      <slot />
+    </main>
+    <footer class="border-t border-border bg-surface py-8 mt-auto">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="text-sm text-muted">
+          Geographies of Textiles & Natural Dyes — A researcher-artist's field notebook
+        </p>
+        <div class="flex gap-4 text-sm text-muted">
+          <a href="/" class="hover:text-accent transition-colors">Home</a>
+          <a href="/gallery" class="hover:text-accent transition-colors">Gallery</a>
+          <a href="/admin" class="hover:text-accent transition-colors">Admin</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

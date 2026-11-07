@@ -1,0 +1,76 @@
+---
+import '../styles/global.css';
+import { Navbar } from '../components/Navbar.tsx';
+import { getCollection } from 'astro:content';
+
+const { frontmatter, Content } = Astro.props;
+
+const tags = frontmatter.tags ?? [];
+const publishedAt = frontmatter.publishedAt ?? '';
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{frontmatter.title} — Geographies of Textiles & Natural Dyes</title>
+    <meta name="description" content={frontmatter.description} />
+    <slot name="head" />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <Navbar />
+    <article class="flex-grow max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      {frontmatter.coverImage && (
+        <figure class="mb-8">
+          <img
+            src={frontmatter.coverImage}
+            alt={frontmatter.title}
+            class="w-full h-auto rounded-lg shadow-lg border border-border"
+            loading="lazy"
+          />
+          <figcaption class="mt-2 text-sm text-muted italic text-center">
+            {frontmatter.title}
+          </figcaption>
+        </figure>
+      )}
+      <header class="mb-10">
+        <h1 class="text-4xl md:text-5xl font-heading font-bold text-text mb-4 leading-tight text-balance">
+          {frontmatter.title}
+        </h1>
+        <p class="text-lg text-muted font-body mb-6">{frontmatter.description}</p>
+        <div class="flex flex-wrap gap-2 text-sm text-muted font-tech">
+          {tags.map((tag) => (
+            <span class="px-2 py-1 rounded border border-border bg-surface/50">{tag}</span>
+          ))}
+          {publishedAt && (
+            <span class="px-2 py-1 rounded border border-border bg-surface/50">
+              {new Date(publishedAt).toLocaleDateString(undefined, {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })}
+            </span>
+          )}
+        </div>
+      </header>
+      <div class="prose prose-lg max-w-none" style={{ fontFamily: 'var(--font-body)' }}>
+        <Content />
+      </div>
+    </article>
+    <footer class="border-t border-border bg-surface py-8 mt-auto">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="text-sm text-muted">
+          Geographies of Textiles & Natural Dyes — A researcher-artist's field notebook
+        </p>
+        <div class="flex gap-4 text-sm text-muted">
+          <a href="/" class="hover:text-accent transition-colors">Home</a>
+          <a href="/gallery" class="hover:text-accent transition-colors">Gallery</a>
+          <a href="/admin" class="hover:text-accent transition-colors">Admin</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
