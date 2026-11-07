@@ -15,7 +15,7 @@ const publishedPosts = posts
 <BaseLayout title="Geographies of Textiles & Natural Dyes">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <div class="text-center mb-16">
-      <h1 class="text-5xl md:text-7xl font-heading font-bold text-text mb-4 leading-tight">
+      <h1 class="text-5xl md:text-5xl font-heading text-text mb-4 leading-tight">
         Geographies of<br />
         Textiles &amp; Natural Dyes
       </h1>
@@ -27,7 +27,7 @@ const publishedPosts = posts
     </div>
 
     <section class="mb-16">
-      <h2 class="text-3xl font-heading font-bold text-text mb-8">Recent Essays</h2>
+      <h2 class="text-2xl font-heading text-text mb-8">Recent Essays</h2>
       {publishedPosts.length === 0 ? (
         <p class="text-muted">No published essays yet.</p>
       ) : (
@@ -44,7 +44,7 @@ const publishedPosts = posts
                   loading="lazy"
                 />
               )}
-              <h3 class="text-xl font-heading font-bold text-text mb-2 group-hover:text-accent transition-colors">
+              <h3 class="text-xl font-heading text-text mb-2 group-hover:text-accent transition-colors">
                 {post.data.title}
               </h3>
               <p class="text-muted font-body mb-4 line-clamp-3">{post.data.description}</p>

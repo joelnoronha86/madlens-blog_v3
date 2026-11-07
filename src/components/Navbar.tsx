@@ -12,9 +12,9 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center gap-2">
-            <span className="font-heading font-bold text-xl text-accent tracking-tight">
+            <span className="font-heading text-sm tracking-tight">
               Geographies
-            </span>
+              </span>
             <span className="font-body text-sm text-muted">of Textiles & Natural Dyes</span>
           </div>
 
